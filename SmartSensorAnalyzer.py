@@ -114,11 +114,11 @@ def Summarize_data(data):
         elif choice == "2":
             print(f"Max stress: {stress_max:.2f} and min stress: {stress_min:.2f} and average stress: {stress_avg:.2f}")
         elif choice == "3":
-            print(f"Max displacement: {displacement_max:.2f} and min displacement: {displacement_min:.2f} and average displacement: {displacement_avg:.2f}")
+            print(f"Max displacement: {displacement_max} and min displacement: {displacement_min} and average displacement: {displacement_avg}")
         elif choice == "4":
             print(f"Max temperature: {temp_max:.2f}℃ and min temperature: {temp_min:.2f} and average temperature: {tem_avg:.2f}")
             print(f"Max stress: {stress_max:.2f} and min stress: {stress_min:.2f} and average stress: {stress_avg:.2f}")
-            print(f"Max displacement: {displacement_max:.2f} and min displacement: {displacement_min:.2f} and average displacement: {displacement_avg:.2f}")
+            print(f"Max displacement: {displacement_max} and min displacement: {displacement_min} and average displacement: {displacement_avg}")
         else:
             print("Invalid choice. Please enter a number between 1 and 4.")
             return 0
@@ -214,12 +214,12 @@ def timestapms_extracted(data):
 
 #Create a tuple of the most recent reading for each sensor
 def most_recent_reading(data):
-    recent_readings = {}
+    recent_readings = tuple() # Create an empty tuple to store the most recent readings
     for sensor_id, readings in data.items():
-        recent_readings[sensor_id] = readings[-1]  # Get the last reading for each sensor
-    print("Most recent readings for each sensor:")
-    for sensor_id, reading in recent_readings.items():
-        print(f"Sensor {sensor_id}: {reading['timestamp']}, Temperature: {reading['temperature']}℃, Stress: {reading['stress']}, Displacement: {reading['displacement']}m")
+        if readings:
+            most_recent = readings[-1] # Get last reading for each sensor
+            recent_readings += (sensor_id, most_recent["timestamp"], most_recent["temperature"], most_recent["stress"], most_recent["displacement"])
+    print(recent_readings) # Print the tuple of most recent readings for each sensor
 
 
 
