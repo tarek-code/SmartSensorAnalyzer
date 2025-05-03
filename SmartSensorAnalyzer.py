@@ -169,10 +169,8 @@ def max_and_min_values(data):
         for reading in readings:
             if reading["temperature"] > max_temp:
                 max_temp = reading["temperature"]
-                max_temp_sensor = sensor_id
             if reading["temperature"] < min_temp:
                 min_temp = reading["temperature"]
-                min_temp_sensor = sensor_id
             if reading["displacement"] > max_displacement:
                 max_displacement = reading["displacement"]
             if reading["temperature"] > 0:
